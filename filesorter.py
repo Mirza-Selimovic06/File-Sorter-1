@@ -35,14 +35,11 @@ def sort(p):
                 t_dir = p / "Music"
             case ".mp4":
                 t_dir = p / "Videos"
-            case ".txt":
+            case ".docx" | ".doc" | ".pdf" | ".txt":
                 t_dir = p / "Documents"
-            case ".docx":
-                t_dir = p / "Documents"
-            case ".doc":
-                t_dir = p / "Documents"
-            case ".pdf":
-                t_dir = p / "Documents"
+            case ".js" | ".ts" | ".cpp" | ".c" | ",py":
+                t_dir = p / "Code" 
+           
 
         t_dir.mkdir(exist_ok=True)
         
