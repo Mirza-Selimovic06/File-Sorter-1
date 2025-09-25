@@ -1,5 +1,6 @@
 import os
 import pathlib
+import shutil
 from pathlib import Path
 
 #Main function
@@ -29,8 +30,10 @@ def sort(p):
         #checks if the file is a file if yes continue
         if not f.is_file():
             continue
-
-        match f.suffix.lower:
+        #sets t_dir to none so it exists
+        t_dir = None
+        #match case statement to find the suffix and create path
+        match f.suffix:
             case ".mp3":
                 t_dir = p / "Music"
             case ".mp4":
@@ -39,10 +42,18 @@ def sort(p):
                 t_dir = p / "Documents"
             case ".js" | ".ts" | ".cpp" | ".c" | ",py":
                 t_dir = p / "Code" 
-           
-
-        t_dir.mkdir(exist_ok=True)
+            case _:
+                t_dir = p / "Other"
         
+        #makes the directory in path for example if case _ it makes a directory called Other
+        t_dir.mkdir(parents=True, exist_ok=True)
+        #set final destination path
+        dest = t_dir / f.name
+        #moves file to destination
+        shutil.move(str(f), str(dest))
+        #prints destination
+        print(dest)
+
 main()
 
 
